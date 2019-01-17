@@ -40,7 +40,6 @@ app.use((request, response, next) => {
 app.use(express.static(__dirname + '/public'))
 
 
-
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear()
 })
@@ -62,6 +61,10 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs');
+});
+
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
         pageTitle: 'About Page',
@@ -74,7 +77,6 @@ app.get('/bad', (req, res) => {
         error: 'Error handling request'
     });
 });
-
 
 //app.listen takes 2 arguments, the port to listen to, and a function
 app.listen(port, () => {
