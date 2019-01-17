@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs')
 const hbs = require('hbs')
 
+const port = process.env.PORT || 3000; //port for our app which heroku will use for the app 
+
 var app = express();
 
 
@@ -13,9 +15,10 @@ app.set('view engine', 'hbs');
 
 //make express use some built-in middleware (app.use)
 //if this is present, we are in maintenance mode
-app.use((req, res, next) => {
-    res.render('maintenance.hbs')
-})
+
+// app.use((req, res, next) => {
+//     res.render('maintenance.hbs')
+// })
 
 //we use middleware below to make a timestamp, and 
 //pull info from the request object - which contains all info
@@ -35,7 +38,6 @@ app.use((request, response, next) => {
 
 //__dirname is the name of the parent directory, so we concatenate this with /public 
 app.use(express.static(__dirname + '/public'))
-
 
 
 
@@ -75,6 +77,6 @@ app.get('/bad', (req, res) => {
 
 
 //app.listen takes 2 arguments, the port to listen to, and a function
-app.listen(3000, () => {
-    'server is up on port 3000'
+app.listen(port, () => {
+    console.log(`server is up on port ${port}`)
 });
